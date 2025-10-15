@@ -14,6 +14,9 @@ import {
 //* Database
 import { MongooseConfigService } from '@configuration/database/mongoose.database';
 
+//* Modules
+import { UsersModule } from '@users/users.module';
+
 @Module({
   imports: [
     //* ENVIROMENTS
@@ -38,6 +41,9 @@ import { MongooseConfigService } from '@configuration/database/mongoose.database
     MongooseModule.forRootAsync({
       useClass: MongooseConfigService,
     }),
+
+    //* MODULES
+    UsersModule
   ],
 
   controllers: [],

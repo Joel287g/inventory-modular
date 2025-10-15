@@ -1,0 +1,1 @@
+export { Users, UsersSchema } from '@users/schemas/users.schema';

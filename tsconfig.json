@@ -23,7 +23,13 @@
     //? Define patrones de rutas para rastrear módulos en lugar de buscarlos en la carpeta baseUrl.
     "paths": {
       "@main/*": ["./src/*"],
+      "@authy/*": ["./src/auth/*"],
+      "@common/*": ["./src/common/*"],
       "@configuration/*": ["./src/configuration/*"],
+      "@logger/*": ["./src/logger/*"],
+      "@sniffer/*": ["./src/sniffer/*"],
+      "@settings/*": ["./src/settings/*"],
+      "@users/*": ["./src/users/*"]
     },
     //? Habilita el modo incremental, lo que significa que TypeScript intentará reutilizar el trabajo realizado en la compilación anterior.
     "incremental": true,
