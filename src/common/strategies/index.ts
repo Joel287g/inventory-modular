@@ -1,0 +1,1 @@
+export { JwtStrategy } from "@common/strategies/jwt.strategy";

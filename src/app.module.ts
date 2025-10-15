@@ -14,7 +14,13 @@ import {
 //* Database
 import { MongooseConfigService } from '@configuration/database/mongoose.database';
 
+//* Middlewares
+import { MiddlewaresModule } from '@common/middlewares.module';
+
 //* Modules
+import { AuthModule } from '@authy/auth.module';
+import { SnifferModule } from '@sniffer/sniffer.module';
+
 import { UsersModule } from '@users/users.module';
 
 @Module({
@@ -42,8 +48,14 @@ import { UsersModule } from '@users/users.module';
       useClass: MongooseConfigService,
     }),
 
+    //* MIDDLEWARES
+    MiddlewaresModule,
+
     //* MODULES
-    UsersModule
+    AuthModule,
+    SnifferModule,
+
+    UsersModule,
   ],
 
   controllers: [],
