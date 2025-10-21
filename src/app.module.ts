@@ -23,6 +23,9 @@ import { SnifferModule } from '@sniffer/sniffer.module';
 
 import { UsersModule } from '@users/users.module';
 
+//* Services
+import { AuthService } from '@authy/services/jwt.service';
+
 @Module({
   imports: [
     //* ENVIROMENTS
@@ -59,7 +62,7 @@ import { UsersModule } from '@users/users.module';
   ],
 
   controllers: [],
-  providers: [],
-  exports: [],
+  providers: [AuthService],
+  exports: [AuthService],
 })
 export class AppModule {}

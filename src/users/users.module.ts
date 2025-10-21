@@ -9,12 +9,15 @@ import { UsersError } from '@common/helpers/errors';
 import { UsersRepository } from '@common/repositories';
 import { MongoDBUsersRepository } from '@common/repositories/mongo';
 
+import { UsersAuthController } from '@users/controllers';
+import { UsersAuthService } from '@users/services';
+
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: Users.name, schema: UsersSchema }]),
   ],
 
-  controllers: [],
+  controllers: [UsersAuthController],
   providers: [
     {
       provide: UsersRepository,
@@ -25,6 +28,7 @@ import { MongoDBUsersRepository } from '@common/repositories/mongo';
     UsersError,
 
     //? Services
+    UsersAuthService,
   ],
 })
 export class UsersModule {}

@@ -1,0 +1,1 @@
+export { UsersAuthController } from "@users/controllers/users-auth.controller";

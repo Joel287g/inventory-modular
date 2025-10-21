@@ -1,5 +1,5 @@
 //? Imports de codigo
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class PhoneDto {
@@ -12,10 +12,10 @@ export class PhoneDto {
   cca2: string;
 
   @ApiProperty({
-    description: 'Code zone for the phone number (required)',
-    required: true,
+    description: 'Code zone for the phone number (optional)',
+    required: false,
   })
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   code: string;
 

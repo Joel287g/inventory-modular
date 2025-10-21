@@ -25,7 +25,7 @@ export class Users extends Document {
   @Prop({ required: true, type: Types.ObjectId })
   _id: Types.ObjectId;
 
-  @Prop({ required: true, type: String, unique: true })
+  @Prop({ required: false, type: String, unique: true, sparse: true })
   uid: string;
 
   @Prop({ required: true, type: [Types.ObjectId], default: [] })
@@ -59,7 +59,12 @@ export class Users extends Document {
   @Prop({ required: false, type: String })
   workArea: String;
 
-  @Prop({ required: true, type: String, enum: AccountTypes })
+  @Prop({
+    required: true,
+    type: String,
+    enum: AccountTypes,
+    default: AccountTypes.PERSONAL,
+  })
   accountType: AccountTypes;
 
   @Prop({
@@ -70,7 +75,12 @@ export class Users extends Document {
   })
   role: UsersRoles;
 
-  @Prop({ required: true, type: String, enum: UsersStatus })
+  @Prop({
+    required: true,
+    type: String,
+    enum: UsersStatus,
+    default: UsersStatus.PENDING,
+  })
   status: UsersStatus;
 }
 

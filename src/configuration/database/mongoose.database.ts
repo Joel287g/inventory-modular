@@ -27,7 +27,7 @@ export class MongooseConfigService implements MongooseOptionsFactory {
       uri: this.configService.database.uri,
       retryAttempts: 3,
       retryDelay: 3000,
-      lazyConnection: true,
+      lazyConnection: false,
 
       //? Connection succesfully
       connectionFactory: (connection: any) => {

@@ -19,6 +19,24 @@ export class SwaggerRunner {
     return this.config
       .setTitle(`Inventory - ${process.env.NODE_ENV}`)
       .setDescription('Inventory API Nestjs')
+      .addApiKey(
+        {
+          type: 'apiKey',
+          name: 'x-api-key',
+          in: 'header',
+          description: 'Enter API key',
+        },
+        'x-api-key',
+      )
+      .addApiKey(
+        {
+          type: 'apiKey',
+          name: 'authorization',
+          in: 'header',
+          description: 'Enter JWT token',
+        },
+        'authorization',
+      )
       .setVersion('1.0')
       .build();
   }
