@@ -9,11 +9,11 @@ import {
 //? Imports de usuario
 import { BaseError, BaseErrorInterface } from '@common/helpers/errors/base';
 
-const subject: String = 'User';
-const subjects: String = 'Users';
+const subject: String = 'Company';
+const subjects: String = 'Companies';
 
 @Injectable()
-export class UsersError extends BaseError implements BaseErrorInterface {
+export class CompaniesError extends BaseError implements BaseErrorInterface {
   badRequest(
     objectOrError: any = 'A bad request has been received. Please check your payload and try again.',
     descriptionOrOptions?: HttpExceptionOptions,
