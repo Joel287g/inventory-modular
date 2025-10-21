@@ -22,7 +22,7 @@ export class CompaniesAuthController {
   @ApiOperation({
     summary: 'Create a new company',
   })
-  @ApiConsumes(MimeTypesApplication.FORM_URLENCODED, MimeTypesApplication.JSON)
+  @ApiConsumes(MimeTypesApplication.JSON, MimeTypesApplication.FORM_URLENCODED)
   @ApiBody({ type: CompaniesAuthCreateDto })
   public async createOwner(@Body() payload: CompaniesAuthCreateDto) {
     try {

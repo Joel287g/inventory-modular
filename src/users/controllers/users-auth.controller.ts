@@ -4,6 +4,7 @@ import { ApiBody, ApiConsumes, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 //? Imports de usuario
 import { IsPublicJwt, SwaggerHeaders } from '@main/common/decorators';
+import { MimeTypesApplication } from '@main/common/enums';
 
 import { UsersAuthService } from '@users/services';
 import { UsersAuthCreateOwnerDto } from '@users/dtos';
@@ -20,7 +21,7 @@ export class UsersAuthController {
   @ApiOperation({
     summary: 'Create a new user owner without company',
   })
-  @ApiConsumes('application/json')
+  @ApiConsumes(MimeTypesApplication.JSON, MimeTypesApplication.FORM_URLENCODED)
   @ApiBody({ type: UsersAuthCreateOwnerDto })
   public async createOwner(@Body() payload: UsersAuthCreateOwnerDto) {
     try {

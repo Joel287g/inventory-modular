@@ -1,6 +1,6 @@
 export enum MimeTypesApplication {
-  FORM_URLENCODED = 'application/x-www-form-urlencoded',
   JSON = 'application/json',
+  FORM_URLENCODED = 'application/x-www-form-urlencoded',
 }
 
 export enum MimeTypesMultipart {
