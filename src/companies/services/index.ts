@@ -1,0 +1,1 @@
+export { CompaniesAuthService } from "@companies/services/companies-auth.service";

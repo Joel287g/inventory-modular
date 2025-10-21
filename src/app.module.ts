@@ -22,6 +22,7 @@ import { AuthModule } from '@authy/auth.module';
 import { SnifferModule } from '@sniffer/sniffer.module';
 
 import { UsersModule } from '@users/users.module';
+import { CompaniesModule } from '@companies/companies.module';
 
 //* Services
 import { AuthService } from '@authy/services/jwt.service';
@@ -59,6 +60,7 @@ import { AuthService } from '@authy/services/jwt.service';
     SnifferModule,
 
     UsersModule,
+    CompaniesModule
   ],
 
   controllers: [],

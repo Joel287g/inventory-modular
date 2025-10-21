@@ -1,5 +1,4 @@
 //? Imports de codigo
-import { PhoneDto } from '@main/common/dtos';
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import {
@@ -12,6 +11,7 @@ import {
 } from 'class-validator';
 
 //? Imports de usuario
+import { PhoneDto } from '@main/common/dtos';
 
 export class UsersAuthCreateOwnerDto {
   @ApiProperty({

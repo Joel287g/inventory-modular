@@ -29,7 +29,8 @@
       "@logger/*": ["./src/logger/*"],
       "@sniffer/*": ["./src/sniffer/*"],
       "@settings/*": ["./src/settings/*"],
-      "@users/*": ["./src/users/*"]
+      "@users/*": ["./src/users/*"],
+      "@companies/*": ["./src/companies/*"]
     },
     //? Habilita el modo incremental, lo que significa que TypeScript intentará reutilizar el trabajo realizado en la compilación anterior.
     "incremental": true,
