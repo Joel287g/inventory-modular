@@ -1,15 +1,31 @@
 //? Imports de codigo
-import { ClientSession, Types } from 'mongoose';
-
 import { Injectable } from '@nestjs/common';
 
 //? Imports de usuario
-import { UsersRepository } from '@main/common/repositories';
-import { AuthService } from '@main/auth/services/jwt.service';
-import { UsersError } from '@main/common/helpers/errors';
+import { CompaniesRepository } from '@main/common/repositories';
+import { CompaniesError } from '@main/common/helpers/errors';
 
-import { UsersAuthCreateOwnerDto } from '@users/dtos';
-import { Phone } from '@main/common/schemas';
+import { CompaniesAuthCreateDto } from '@companies/dtos';
+import { Types } from 'mongoose';
 
 @Injectable()
-export class CompaniesAuthService {}
+export class CompaniesAuthService {
+  constructor(
+    private readonly companiesRepository: CompaniesRepository,
+    private readonly companiesError: CompaniesError,
+  ) {}
+
+  async create({ ownerId, name, address }: CompaniesAuthCreateDto) {
+    try {
+      const company = await this.companiesRepository.create({
+        ownerId,
+        name,
+        address,
+      });
+
+      return company;
+    } catch (error) {
+      throw error;
+    }
+  }
+}

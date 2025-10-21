@@ -4,12 +4,17 @@ import { ApiBody, ApiConsumes, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 //? Imports de usuario
 import { IsPublicJwt, SwaggerHeaders } from '@main/common/decorators';
+import { MimeTypesApplication } from '@main/common/enums';
+
+import { CompaniesAuthCreateDto } from '@companies/dtos';
+
+import { CompaniesAuthService } from '@companies/services';
 
 @SwaggerHeaders()
 @ApiTags('Companies Auth')
 @Controller('companies-auth')
 export class CompaniesAuthController {
-  constructor() {}
+  constructor(private readonly companiesAuthService: CompaniesAuthService) {}
 
   @IsPublicJwt()
   @Post('/create-company')
@@ -17,11 +22,11 @@ export class CompaniesAuthController {
   @ApiOperation({
     summary: 'Create a new company',
   })
-  @ApiConsumes('application/json')
-  // @ApiBody({ type: UsersAuthCreateOwnerDto })
-  public async createOwner(@Body() payload: any) {
+  @ApiConsumes(MimeTypesApplication.FORM_URLENCODED, MimeTypesApplication.JSON)
+  @ApiBody({ type: CompaniesAuthCreateDto })
+  public async createOwner(@Body() payload: CompaniesAuthCreateDto) {
     try {
-      // return await this.usersAuthService.createOwner(payload);
+      return await this.companiesAuthService.create(payload);
     } catch (error) {
       throw error;
     }
