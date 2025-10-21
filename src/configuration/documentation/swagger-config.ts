@@ -2,6 +2,9 @@
 import { INestApplication } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
+//? Imports de usuario
+import { description, author, version } from '../../../package.json';
+
 export class SwaggerRunner {
   private config: DocumentBuilder;
   private app: INestApplication;
@@ -18,26 +21,36 @@ export class SwaggerRunner {
   private setup() {
     return this.config
       .setTitle(`Inventory - ${process.env.NODE_ENV}`)
-      .setDescription('Inventory API Nestjs')
-      .addApiKey(
-        {
-          type: 'apiKey',
-          name: 'x-api-key',
-          in: 'header',
-          description: 'Enter API key',
-        },
-        'x-api-key',
-      )
-      .addApiKey(
-        {
-          type: 'apiKey',
-          name: 'authorization',
-          in: 'header',
-          description: 'Enter JWT token',
-        },
-        'authorization',
-      )
+      .setDescription(description)
       .setVersion('1.0')
+      .setContact('Joel', author, null)
+      .addGlobalParameters(
+        {
+          name: 'app-version',
+          description: 'Version for API',
+          in: 'header',
+          required: true,
+          allowEmptyValue: false,
+          schema: {
+            type: 'string',
+            default: version,
+          },
+        },
+        {
+          name: 'x-api-key',
+          description: 'Enter API key',
+          in: 'header',
+          required: true,
+          allowEmptyValue: false,
+          schema: {
+            type: 'string',
+            default:
+              process.env.NODE_ENV !== 'production'
+                ? process.env.API_KEY
+                : null,
+          },
+        },
+      )
       .build();
   }
 

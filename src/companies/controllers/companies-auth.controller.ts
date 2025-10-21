@@ -3,14 +3,13 @@ import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
 import { ApiBody, ApiConsumes, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 //? Imports de usuario
-import { IsPublicJwt, SwaggerHeaders } from '@main/common/decorators';
+import { IsPublicJwt } from '@main/common/decorators';
 import { MimeTypesApplication } from '@main/common/enums';
 
 import { CompaniesAuthCreateDto } from '@companies/dtos';
 
 import { CompaniesAuthService } from '@companies/services';
 
-@SwaggerHeaders()
 @ApiTags('Companies Auth')
 @Controller('companies-auth')
 export class CompaniesAuthController {

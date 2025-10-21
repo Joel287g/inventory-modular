@@ -1,10 +1,10 @@
 {
   "name": "inventory-modular",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "Proyecto personal de investigación y desarrollo que implementa el mismo sistema de gestión de inventario utilizando dos patrones arquitectónicos distintos: Arquitectura Modular y Arquitectura Hexagonal (Ports and Adapters). El objetivo principal es comparar la estructura, el desacoplamiento y la portabilidad de la lógica de negocio en un entorno real.",
+  "author": "https://github.com/Joel287g",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
