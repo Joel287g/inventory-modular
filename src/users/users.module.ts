@@ -4,10 +4,14 @@ import { MongooseModule } from '@nestjs/mongoose';
 
 //? Imports de usuario
 import { Users, UsersSchema } from '@users/schemas';
+import { Companies, CompaniesSchema } from '@companies/schemas';
 
-import { UsersError } from '@common/helpers/errors';
-import { UsersRepository } from '@common/repositories';
-import { MongoDBUsersRepository } from '@common/repositories/mongo';
+import { CompaniesError, UsersError } from '@common/helpers/errors';
+import { UsersRepository, CompaniesRepository } from '@common/repositories';
+import {
+  MongoDBUsersRepository,
+  MongoDBCompaniesRepository,
+} from '@common/repositories/mongo';
 
 import { UsersAuthController } from '@users/controllers';
 import { UsersAuthService } from '@users/services';
@@ -15,6 +19,9 @@ import { UsersAuthService } from '@users/services';
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: Users.name, schema: UsersSchema }]),
+    MongooseModule.forFeature([
+      { name: Companies.name, schema: CompaniesSchema },
+    ]),
   ],
 
   controllers: [UsersAuthController],
@@ -23,9 +30,14 @@ import { UsersAuthService } from '@users/services';
       provide: UsersRepository,
       useClass: MongoDBUsersRepository,
     },
+    {
+      provide: CompaniesRepository,
+      useClass: MongoDBCompaniesRepository,
+    },
 
     //? Errors
     UsersError,
+    CompaniesError,
 
     //? Services
     UsersAuthService,

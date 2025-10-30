@@ -3,19 +3,21 @@ import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
 import { ApiBody, ApiConsumes, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 //? Imports de usuario
-import { IsPublicJwt } from '@main/common/decorators';
+import { Auth } from '@main/common/decorators';
 import { MimeTypesApplication } from '@main/common/enums';
 
 import { CompaniesAuthCreateDto } from '@companies/dtos';
 
 import { CompaniesAuthService } from '@companies/services';
 
+import { UsersRoles } from '@users/enums';
+
 @ApiTags('Companies Auth')
 @Controller('companies-auth')
 export class CompaniesAuthController {
   constructor(private readonly companiesAuthService: CompaniesAuthService) {}
 
-  @IsPublicJwt()
+  @Auth(UsersRoles.ADMIN)
   @Post('/create-company')
   @HttpCode(HttpStatus.CREATED)
   @ApiOperation({

@@ -77,4 +77,8 @@ export class BaseRepository<T> {
   async aggregate(pipeline: any[]): Promise<T[]> {
     return await this.model.aggregate(pipeline);
   }
+
+  async exists(query: FilterQuery<T>): Promise<boolean> {
+    return !!(await this.model.exists(query));
+  }
 }

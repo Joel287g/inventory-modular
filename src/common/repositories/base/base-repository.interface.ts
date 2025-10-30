@@ -38,4 +38,5 @@ export abstract class BaseRepositoryInterface<T> {
     session?: any,
   ): Promise<UpdateWriteOpResult>;
   abstract aggregate(pipeline: any[]): Promise<T[]>;
+  abstract exists(query: FilterQuery<T>): Promise<boolean>;
 }

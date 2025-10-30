@@ -1,5 +1,12 @@
 //? Imports de codigo
-import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  HttpCode,
+  HttpStatus,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import {
   ApiBody,
   ApiConsumes,
@@ -14,7 +21,11 @@ import { MimeTypesApplication } from '@main/common/enums';
 
 import { UsersRoles } from '@users/enums';
 import { UsersAuthService } from '@users/services';
-import { UsersAuthCreateOwnerDto, UsersAuthLoginDto } from '@users/dtos';
+import {
+  UsersAuthAddCompanyDto,
+  UsersAuthCreateOwnerDto,
+  UsersAuthLoginDto,
+} from '@users/dtos';
 import { Users } from '../schemas';
 
 @ApiTags('Users Auth')
@@ -36,7 +47,6 @@ export class UsersAuthController {
     @GetUser() user: Users,
   ) {
     try {
-      console.log('user :>> ', user);
       return await this.usersAuthService.createOwner(payload);
     } catch (error) {
       throw error;
@@ -44,14 +54,31 @@ export class UsersAuthController {
   }
 
   @IsPublicJwt()
-  @Post('login')
+  @Post('/login')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Login user' })
-  @ApiConsumes('application/json', 'application/x-www-form-urlencoded')
+  @ApiConsumes(MimeTypesApplication.JSON, MimeTypesApplication.FORM_URLENCODED)
   @ApiBody({ type: UsersAuthLoginDto })
   async login(@Body() payload: UsersAuthLoginDto) {
     try {
       return await this.usersAuthService.login(payload);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  @Auth([UsersRoles.ADMIN, UsersRoles.OWNER])
+  @Patch('/add-company')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Add company to user' })
+  @ApiConsumes(MimeTypesApplication.JSON, MimeTypesApplication.FORM_URLENCODED)
+  @ApiBody({ type: UsersAuthAddCompanyDto })
+  public async addCompany(
+    @GetUser() user: Users,
+    @Body() payload: UsersAuthAddCompanyDto,
+  ) {
+    try {
+      return await this.usersAuthService.addCompany(user, payload);
     } catch (error) {
       throw error;
     }

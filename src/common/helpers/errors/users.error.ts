@@ -57,4 +57,15 @@ export class UsersError extends BaseError implements BaseErrorInterface {
       descriptionOrOptions,
     );
   }
+
+  companyAlreadyExist(
+    objectOrError: any = 'Company already exist',
+    descriptionOrOptions?: HttpExceptionOptions,
+  ): HttpException {
+    return this.httpException(
+      objectOrError,
+      HttpStatus.CONFLICT,
+      descriptionOrOptions,
+    );
+  }
 }

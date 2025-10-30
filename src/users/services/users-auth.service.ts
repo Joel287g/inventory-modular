@@ -2,18 +2,30 @@
 import { Injectable } from '@nestjs/common';
 
 //? Imports de usuario
-import { UsersRepository } from '@main/common/repositories';
+import {
+  UsersRepository,
+  CompaniesRepository,
+} from '@main/common/repositories';
 import { AuthService } from '@main/auth/services/jwt.service';
-import { UsersError } from '@main/common/helpers/errors';
+import { CompaniesError, UsersError } from '@main/common/helpers/errors';
 
-import { UsersAuthCreateOwnerDto, UsersAuthLoginDto } from '@users/dtos';
+import {
+  UsersAuthAddCompanyDto,
+  UsersAuthCreateOwnerDto,
+  UsersAuthLoginDto,
+} from '@users/dtos';
 import { UsersRoles } from '@users/enums';
+
+import { Users } from '@users/schemas';
 
 @Injectable()
 export class UsersAuthService {
   constructor(
     private readonly usersRepository: UsersRepository,
+    private readonly companiesRepository: CompaniesRepository,
+
     private readonly usersError: UsersError,
+    private readonly companiesError: CompaniesError,
 
     private readonly authService: AuthService,
   ) {}
@@ -44,6 +56,36 @@ export class UsersAuthService {
       const jwtToken = this.authService.sign(user);
 
       return { user, jwtToken };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async addCompany(
+    { _id: userId }: Users,
+    { companyId, ownerId }: UsersAuthAddCompanyDto,
+  ) {
+    try {
+      const user: Users = await this.usersRepository.findById(
+        ownerId || userId,
+      );
+
+      if (!user) throw this.usersError.notFound();
+
+      const isCompanyExist: Boolean =
+        await this.companiesRepository.exists(companyId);
+
+      if (!isCompanyExist) throw this.companiesError.notFound();
+
+      const isCompanyExistIntoUser: Boolean = !!user.companyId.find(
+        (id) => id.toString() === companyId.toString(),
+      );
+
+      if (isCompanyExistIntoUser) throw this.usersError.companyAlreadyExist();
+
+      user.companyId.push(companyId);
+
+      return await user.save();
     } catch (error) {
       throw error;
     }
