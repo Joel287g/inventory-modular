@@ -20,4 +20,8 @@ export class MongoDBUsersRepository
   ) {
     super(usersModel);
   }
+
+  async findByUid(uid: string): Promise<Users> {
+    return await this.usersModel.findOne({ uid });
+  }
 }

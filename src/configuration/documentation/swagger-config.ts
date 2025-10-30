@@ -51,6 +51,14 @@ export class SwaggerRunner {
           },
         },
       )
+      .addApiKey(
+        {
+          type: 'apiKey',
+          name: 'authorization',
+          in: 'header',
+        },
+        'authorization',
+      )
       .build();
   }
 
