@@ -7,4 +7,7 @@ import { BaseRepositoryInterface } from '@common/repositories/base';
 import { Companies } from '@companies/schemas';
 
 @Injectable()
-export abstract class CompaniesRepository extends BaseRepositoryInterface<Companies> {}
+export abstract class CompaniesRepository extends BaseRepositoryInterface<Companies> {
+  abstract findByName(name: string): Promise<Companies>;
+
+}

@@ -20,4 +20,8 @@ export class MongoDBCompaniesRepository
   ) {
     super(companiesModel);
   }
+
+  findByName(name: string): Promise<Companies> {
+    return this.companiesModel.findOne({ name });
+  }
 }
