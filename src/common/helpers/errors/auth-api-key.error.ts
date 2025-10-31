@@ -7,8 +7,9 @@ import { ApiKeyErrorCodes } from '@authy/enums/errors';
 
 @Injectable()
 export class AuthsApiKeyError extends BaseError {
-  notFound(): HttpException {
+  notFound(locator: string): HttpException {
     return this.httpException(
+      locator,
       ApiKeyErrorCodes.NOT_FOUND,
       HttpStatus.UNAUTHORIZED,
       {
@@ -18,8 +19,9 @@ export class AuthsApiKeyError extends BaseError {
     );
   }
 
-  invalid(): HttpException {
+  invalid(locator: string): HttpException {
     return this.httpException(
+      locator,
       ApiKeyErrorCodes.INVALID,
       HttpStatus.UNAUTHORIZED,
       {

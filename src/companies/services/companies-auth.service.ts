@@ -24,12 +24,14 @@ export class CompaniesAuthService {
     try {
       const isUserExist: Boolean = await this.usersRepository.exists(ownerId);
 
-      if (!isUserExist) throw this.usersError.notFound();
+      if (!isUserExist)
+        throw this.usersError.notFound('COMP-SER-COMP_AUTH-001');
 
       const isCompanyNameExist: Boolean =
         !!(await this.companiesRepository.findByName(name));
 
-      if (isCompanyNameExist) throw this.companiesError.conflict();
+      if (isCompanyNameExist)
+        throw this.companiesError.conflict('COMP-SER-COMP_AUTH-002');
 
       const company = await this.companiesRepository.create({
         ownerId,

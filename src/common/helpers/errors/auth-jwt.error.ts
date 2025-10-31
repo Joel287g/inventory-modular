@@ -89,6 +89,11 @@ export class AuthsJwtError extends BaseError {
         break;
     }
 
-    return this.httpException(jwtErrorCode, HttpStatus.UNAUTHORIZED, { cause });
+    return this.httpException(
+      'COMM-HEL-ERR-AUTH_JWT-001',
+      jwtErrorCode,
+      HttpStatus.UNAUTHORIZED,
+      { cause },
+    );
   }
 }

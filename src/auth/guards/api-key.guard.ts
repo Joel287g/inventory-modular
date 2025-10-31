@@ -58,7 +58,7 @@ export class ApiKeyGuard implements CanActivate {
         data,
       });
 
-      this.authsApiKeyError.notFound();
+      this.authsApiKeyError.notFound('AUTH-GUA-API_KEY-001');
     }
 
     //? Invalid
@@ -70,7 +70,7 @@ export class ApiKeyGuard implements CanActivate {
         data,
       });
 
-      this.authsApiKeyError.invalid();
+      this.authsApiKeyError.invalid('AUTH-GUA-API_KEY-002');
     }
 
     return true;

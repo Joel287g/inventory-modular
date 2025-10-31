@@ -24,6 +24,10 @@ export class HttpExceptionFilter implements ExceptionFilter {
     //? If the response has already been sent, we do nothing in the filter
     if (response.headersSent) return;
 
+    const responseAdditionalException = additionalException['response'];
+
+    delete additionalException['response'];
+
     const error: FilterException = {
       message,
       name,
@@ -32,7 +36,11 @@ export class HttpExceptionFilter implements ExceptionFilter {
       method,
       url,
       timestamp: new Date().toISOString(),
-      additionalException,
+      additionalException: {
+        response: responseAdditionalException.response,
+        locator: responseAdditionalException.locator,
+        ...additionalException,
+      },
       stack,
     };
 

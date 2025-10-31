@@ -51,7 +51,7 @@ export class UsersAuthService {
     try {
       const user = await this.usersRepository.findByUid(uid);
 
-      if (!user) throw this.usersError.notFound();
+      if (!user) throw this.usersError.notFound('USER-SER-USER_AUTH-001');
 
       const jwtToken = this.authService.sign(user);
 
@@ -70,18 +70,20 @@ export class UsersAuthService {
         ownerId || userId,
       );
 
-      if (!user) throw this.usersError.notFound();
+      if (!user) throw this.usersError.notFound('USER-SER-USER_AUTH-002');
 
       const isCompanyExist: Boolean =
         await this.companiesRepository.exists(companyId);
 
-      if (!isCompanyExist) throw this.companiesError.notFound();
+      if (!isCompanyExist)
+        throw this.companiesError.notFound('USER-SER-USER_AUTH-003');
 
       const isCompanyExistIntoUser: Boolean = !!user.companyId.find(
         (id) => id.toString() === companyId.toString(),
       );
 
-      if (isCompanyExistIntoUser) throw this.usersError.companyAlreadyExist();
+      if (isCompanyExistIntoUser)
+        throw this.usersError.companyAlreadyExist('USER-SER-USER_AUTH-004');
 
       user.companyId.push(companyId);
 

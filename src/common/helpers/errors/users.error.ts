@@ -15,10 +15,12 @@ const subjects: String = 'Users';
 @Injectable()
 export class UsersError extends BaseError implements BaseErrorInterface {
   badRequest(
+    locator: string,
     objectOrError: any = 'A bad request has been received. Please check your payload and try again.',
     descriptionOrOptions?: HttpExceptionOptions,
   ): HttpException {
     return this.httpException(
+      locator,
       objectOrError,
       HttpStatus.BAD_REQUEST,
       descriptionOrOptions,
@@ -26,10 +28,12 @@ export class UsersError extends BaseError implements BaseErrorInterface {
   }
 
   notFound(
+    locator: string,
     objectOrError: any = `${subject} not found`,
     descriptionOrOptions?: HttpExceptionOptions,
   ): HttpException {
     return this.httpException(
+      locator,
       objectOrError,
       HttpStatus.NOT_FOUND,
       descriptionOrOptions,
@@ -37,10 +41,12 @@ export class UsersError extends BaseError implements BaseErrorInterface {
   }
 
   conflict(
+    locator: string,
     objectOrError: any = `${subject} with conflict`,
     descriptionOrOptions?: HttpExceptionOptions,
   ): HttpException {
     return this.httpException(
+      locator,
       objectOrError,
       HttpStatus.CONFLICT,
       descriptionOrOptions,
@@ -48,10 +54,12 @@ export class UsersError extends BaseError implements BaseErrorInterface {
   }
 
   internalServerError(
+    locator: string,
     objectOrError: any = 'An internal server error occurred',
     descriptionOrOptions?: HttpExceptionOptions,
   ): HttpException {
     return this.httpException(
+      locator,
       objectOrError,
       HttpStatus.INTERNAL_SERVER_ERROR,
       descriptionOrOptions,
@@ -59,10 +67,12 @@ export class UsersError extends BaseError implements BaseErrorInterface {
   }
 
   companyAlreadyExist(
+    locator: string,
     objectOrError: any = 'Company already exist',
     descriptionOrOptions?: HttpExceptionOptions,
   ): HttpException {
     return this.httpException(
+      locator,
       objectOrError,
       HttpStatus.CONFLICT,
       descriptionOrOptions,
